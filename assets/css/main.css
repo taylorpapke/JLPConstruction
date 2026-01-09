@@ -3909,3 +3909,44 @@ input, select, textarea {
 			}
 
 		}
+
+/* Responsive Google Form */
+	.google-form-container {
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+	}
+
+	.google-form-container iframe {
+	width: 100%;
+	max-width: 100%;
+	height: 90vh;
+	min-height: 600px;
+	border: none;
+	}
+
+/* Ensure mobile nav toggle shows */
+@media screen and (max-width: 980px) {
+
+  #sidebar {
+    display: block !important;
+  }
+
+  #sidebar .inner {
+    padding-top: 4em;
+  }
+
+  #sidebar nav ul li a {
+    font-size: 1.1em;
+  }
+}
+
+.sidebar-logo {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.sidebar-logo img {
+  max-height: 160px;
+  width: auto;
+}
