@@ -3918,113 +3918,123 @@ input, select, textarea {
 	}
 
 /* ==========================================================================
-   FINAL LAYOUT ADJUSTMENTS
-   (Paste this at the very bottom of main.css)
+   FINAL LAYOUT ADJUSTMENTS - FIXED FOR MOBILE
    ========================================================================== */
 
-/* 1. Base Logo Styles (For Desktop) */
+/* 1. Base Logo Styles (Desktop) */
 .sidebar-logo {
     text-align: center;
-    padding: 1.5em 0; /* Space above/below logo */
+    padding: 1.5em 0;
 }
 
 .sidebar-logo img {
     width: auto;
     max-width: 90%;
     height: auto;
-    max-height: 220px; /* Big logo for desktop */
+    max-height: 220px;
     display: inline-block;
 }
 
 /* 2. Mobile Top Navigation Bar (Max-width: 736px) */
 @media screen and (max-width: 736px) {
 
-    /* Turn the Sidebar into a Fixed Top Bar */
+    /* MAIN CONTAINER: Turn Sidebar into a horizontal Flexbox */
     #sidebar {
-        display: block !important; /* Force show */
+        display: flex !important; /* Use Flexbox to align siblings */
+        flex-direction: row;      /* Align Logo and Menu side-by-side */
+        justify-content: space-between;
+        align-items: center;
+        
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 60px; /* Fixed height for top bar */
-        line-height: 60px;
+        height: 60px;
         background-color: #312450;
         z-index: 10000;
-        padding: 0 10px;
-        overflow: hidden;
+        padding: 0 15px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        transform: none !important; /* Stop any JS sliding animations */
+        transform: none !important;
+        overflow: visible; /* Allow menu to show */
     }
 
-    /* Layout: Row with space between Logo and Menu */
-    #sidebar > .inner {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-
-    /* Logo: Shrink for the top bar */
+    /* ITEM 1: The Logo */
     .sidebar-logo {
+        flex: 0 0 auto; /* Do not grow or shrink */
         display: flex;
         align-items: center;
-        height: 100%;
         padding: 0;
         margin: 0;
+        height: 100%;
     }
 
     .sidebar-logo img {
-        height: 40px !important; /* Small fixed height */
+        height: 40px !important;
         max-height: 40px !important;
         width: auto;
-        margin: 0;
     }
 
-    /* Menu: Horizontal list aligned right */
-    #sidebar nav {
-        flex-grow: 1;
-        height: 100%;
+    /* ITEM 2: The Inner Container (Holds the Nav) */
+    #sidebar > .inner {
+        flex: 1 1 auto; /* Take up remaining space */
         display: flex;
+        justify-content: flex-end; /* Push menu to the right */
         align-items: center;
-        justify-content: flex-end;
+        padding: 0;
+        margin: 0;
+        width: auto;
+        height: 100%;
+    }
+
+    /* The Navigation Links */
+    #sidebar nav {
+        display: block;
+        height: auto;
     }
 
     #sidebar nav ul {
-        display: flex;
+        display: flex; /* Force horizontal list */
         flex-direction: row;
         margin: 0;
         padding: 0;
+        list-style: none;
+        align-items: center;
     }
 
     #sidebar nav ul li {
-        display: inline-block;
-        margin: 0 0 0 15px; /* Spacing between links */
+        display: block;
+        margin: 0 0 0 15px; /* Space between links */
         padding: 0;
-        transform: none !important;
         opacity: 1 !important;
+        transform: none !important;
     }
 
     #sidebar nav a {
-        font-size: 0.7em; /* Smaller text */
-        padding: 0;
-        border: none;
+        font-size: 0.75em; /* Readable mobile size */
+        font-weight: bold;
         letter-spacing: 1px;
+        border: none;
+        padding: 0;
+        color: rgba(255, 255, 255, 0.7);
+        white-space: nowrap; /* Prevent text wrapping */
     }
 
+    #sidebar nav a:hover,
+    #sidebar nav a.active {
+        color: #ffffff;
+    }
+
+    /* Hide Desktop Decorations */
     #sidebar nav a:after {
-        display: none; /* No underlines on mobile */
+        display: none;
     }
-
-    /* Hide the old "Hamburger" toggle button if JS adds it */
+    
+    /* Hide the built-in mobile toggle button */
     #sidebarToggle {
         display: none !important;
     }
 
-    /* Push site content down */
+    /* Adjust page content */
     #wrapper {
         padding-top: 60px !important;
         margin-left: 0 !important;
