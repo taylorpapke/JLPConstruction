@@ -3918,15 +3918,15 @@ input, select, textarea {
 	}
 
 /* ==========================================================================
-   FINAL LAYOUT ADJUSTMENTS - FIXED FOR MOBILE
+   STRICT MOBILE TOP BAR FIX
+   (Paste this at the very bottom of main.css)
    ========================================================================== */
 
-/* 1. Base Logo Styles (Desktop) */
+/* 1. Base Logo Styles (Desktop defaults) */
 .sidebar-logo {
     text-align: center;
     padding: 1.5em 0;
 }
-
 .sidebar-logo img {
     width: auto;
     max-width: 90%;
@@ -3935,111 +3935,117 @@ input, select, textarea {
     display: inline-block;
 }
 
-/* 2. Mobile Top Navigation Bar (Max-width: 736px) */
+/* 2. Mobile Overrides */
 @media screen and (max-width: 736px) {
 
-    /* MAIN CONTAINER: Turn Sidebar into a horizontal Flexbox */
+    /* --- CONTAINER SETUP --- */
     #sidebar {
-        display: flex !important; /* Use Flexbox to align siblings */
-        flex-direction: row;      /* Align Logo and Menu side-by-side */
-        justify-content: space-between;
-        align-items: center;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
         
-        position: fixed;
+        position: fixed !important;
         top: 0;
         left: 0;
         width: 100%;
-        height: 60px;
-        background-color: #312450;
-        z-index: 10000;
-        padding: 0 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        transform: none !important;
-        overflow: visible; /* Allow menu to show */
+        height: 60px !important;
+        
+        background-color: #312450 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+        z-index: 10000 !important;
+        padding: 0 10px !important;
+        margin: 0 !important;
+        overflow: visible !important;
     }
 
-    /* ITEM 1: The Logo */
+    /* --- LOGO RESET --- */
     .sidebar-logo {
-        flex: 0 0 auto; /* Do not grow or shrink */
-        display: flex;
-        align-items: center;
-        padding: 0;
-        margin: 0;
-        height: 100%;
+        flex: 0 0 auto !important; /* Don't squash logo */
+        display: flex !important;
+        align-items: center !important;
+        height: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
 
     .sidebar-logo img {
-        height: 40px !important;
-        max-height: 40px !important;
-        width: auto;
+        height: 35px !important; /* Strict height limit */
+        width: auto !important;
+        max-height: 35px !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
 
-    /* ITEM 2: The Inner Container (Holds the Nav) */
+    /* --- MENU CONTAINER RESET --- */
+    /* Forces the inner div to sit to the right of the logo */
     #sidebar > .inner {
-        flex: 1 1 auto; /* Take up remaining space */
-        display: flex;
-        justify-content: flex-end; /* Push menu to the right */
-        align-items: center;
-        padding: 0;
-        margin: 0;
-        width: auto;
-        height: 100%;
-    }
-
-    /* The Navigation Links */
-    #sidebar nav {
-        display: block;
-        height: auto;
-    }
-
-    #sidebar nav ul {
-        display: flex; /* Force horizontal list */
-        flex-direction: row;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        align-items: center;
-    }
-
-    #sidebar nav ul li {
-        display: block;
-        margin: 0 0 0 15px; /* Space between links */
-        padding: 0;
-        opacity: 1 !important;
+        flex: 1 1 auto !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-end !important; /* Push menu right */
+        
+        width: auto !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        opacity: 1 !important; /* Override loading fade-in */
         transform: none !important;
     }
 
+    /* --- NAVIGATION RESET --- */
+    #sidebar nav {
+        display: block !important;
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    #sidebar nav ul {
+        display: flex !important;
+        flex-direction: row !important; /* Force horizontal */
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+    }
+
+    /* --- MENU ITEMS RESET --- */
+    /* This overrides the huge desktop margins that push items off screen */
+    #sidebar nav ul li {
+        display: block !important;
+        margin: 0 0 0 10px !important; /* Small left gap */
+        padding: 0 !important;
+        opacity: 1 !important; /* Force visible */
+        transform: none !important; /* Remove animations */
+        transition: none !important;
+    }
+
+    /* --- LINK TEXT RESET --- */
     #sidebar nav a {
-        font-size: 0.75em; /* Readable mobile size */
-        font-weight: bold;
-        letter-spacing: 1px;
-        border: none;
-        padding: 0;
-        color: rgba(255, 255, 255, 0.7);
-        white-space: nowrap; /* Prevent text wrapping */
+        display: block !important;
+        font-size: 0.65em !important; /* Small font to fit width */
+        font-weight: bold !important;
+        color: #ffffff !important; /* Bright white text */
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        white-space: nowrap !important; /* Prevent text wrapping */
+        border: none !important;
+        padding: 5px !important;
+        height: auto !important;
+        line-height: normal !important;
     }
 
-    #sidebar nav a:hover,
-    #sidebar nav a.active {
-        color: #ffffff;
-    }
-
-    /* Hide Desktop Decorations */
+    /* Kill the underline animation */
     #sidebar nav a:after {
-        display: none;
-    }
-    
-    /* Hide the built-in mobile toggle button */
-    #sidebarToggle {
         display: none !important;
     }
 
-    /* Adjust page content */
+    /* --- CONTENT PUSH --- */
     #wrapper {
         padding-top: 60px !important;
         margin-left: 0 !important;
     }
-
     #sidebar + #wrapper + #footer {
         margin-left: 0 !important;
     }
