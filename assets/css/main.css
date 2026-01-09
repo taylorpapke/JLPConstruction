@@ -3928,9 +3928,6 @@ input, select, textarea {
 /* Ensure mobile nav toggle shows */
 @media screen and (max-width: 980px) {
 
-  #sidebar {
-    display: block !important;
-  }
 
   #sidebar .inner {
     padding-top: 4em;
@@ -3943,10 +3940,42 @@ input, select, textarea {
 
 .sidebar-logo {
   text-align: center;
-  margin-bottom: 1em;
+  padding: 1em 0;
 }
 
 .sidebar-logo img {
-  max-height: 160px;
   width: auto;
+  max-width: 90%;
+  height: auto;
+  max-height: 220px;
+  display: inline-block;
 }
+
+/* Ensure Hyperspace mobile menu toggle shows */
+@media screen and (max-width: 980px) {
+
+  body.is-preload #sidebar {
+    transform: translateX(-100%);
+  }
+
+  #sidebarToggle {
+    display: block !important;
+    opacity: 1 !important;
+    z-index: 10001;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  #sidebar nav ul li a {
+    font-size: 1.2em;
+    padding: 0.75em 0;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .sidebar-logo img {
+    max-height: 140px;
+  }
+}
+
+
